@@ -1,5 +1,7 @@
 package com.yzone.util.thread;
 
+import com.yzone.enums.UserRole;
+
 public class StopThreadUnsafe {
 
     public static User user = new User();
