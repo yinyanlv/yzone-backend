@@ -6,4 +6,10 @@
     <select id="queryUser" resultType="com.yzone.entity.User">
           SELECT * FROM user;
     </select>
+    <insert id="insertUser" parameterType="com.yzone.entity.User" useGeneratedKeys="true">
+        INSERT INTO user
+        (username, password, role, state, create_time, update_time)
+        VALUES
+        (#{username}, #{password}, #{role}, #{state}, #{createTime}, #{updateTime});
+    </insert>
 </mapper>

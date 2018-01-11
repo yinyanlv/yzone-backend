@@ -12,4 +12,12 @@ public interface UserDao {
      * @return
      */
     List<User> queryUser();
+
+    /**
+     * 注册用户
+     *
+     * @param user
+     * @return
+     */
+    int insertUser(User user);
 }
