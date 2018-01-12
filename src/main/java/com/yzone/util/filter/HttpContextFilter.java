@@ -22,7 +22,7 @@ public class HttpContextFilter implements Filter {
 
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
-        httpServletResponse.setHeader("Access-Control-Allow-Headers", "Authentication");
+        httpServletResponse.setHeader("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
 
         chain.doFilter(request, httpServletResponse);
     }
