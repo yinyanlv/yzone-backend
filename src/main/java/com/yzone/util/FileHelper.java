@@ -1,4 +1,4 @@
-package com.yzone.util.file;
+package com.yzone.util;
 
 import java.io.*;
 
@@ -419,7 +419,7 @@ public class FileHelper {
 
                 if (fileTemp.isFile()) {
                     FileInputStream in = new FileInputStream(fileTemp);
-                    FileOutputStream out = new FileOutputStream(targetPath + "/" + fileTemp.getName().toString());
+                    FileOutputStream out = new FileOutputStream(targetPath + File.separator + fileTemp.getName().toString());
 
                     byte[] bytesTemp = new byte[1024];
                     int len;
