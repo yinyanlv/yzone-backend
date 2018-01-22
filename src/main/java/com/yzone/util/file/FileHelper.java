@@ -188,6 +188,12 @@ public class FileHelper {
         }
     }
 
+    /**
+     * 在文件尾部追加内容
+     *
+     * @param filePath
+     * @param content
+     */
     public static void appendToFile(String filePath, String content) {
 
         try {
@@ -203,6 +209,12 @@ public class FileHelper {
         }
     }
 
+    /**
+     * 在文件尾部追加内容，（RandomAccessFile实现）
+     *
+     * @param filePath
+     * @param content
+     */
     public static void appendToFileByRandomAccess(String filePath, String content) {
 
         try {
@@ -218,6 +230,11 @@ public class FileHelper {
         }
     }
 
+    /**
+     * 创建文件
+     *
+     * @param filePath
+     */
     public static void createFile(String filePath) {
 
         File file = new File(filePath);
@@ -240,6 +257,13 @@ public class FileHelper {
         }
     }
 
+    /**
+     * 创建临时文件
+     *
+     * @param prefix "test"
+     * @param suffix ".txt"
+     * @param dirPath
+     */
     public static void createTempFile(String prefix, String suffix, String dirPath) {
 
         if (dirPath == null) {
@@ -252,33 +276,43 @@ public class FileHelper {
             }
         } else {
 
-            File file = new File(dirPath);
+            File dir = new File(dirPath);
 
-            if (!file.exists()) {
+            if (!dir.exists()) {
 
                 createDir(dirPath);
             }
 
             try {
 
-                File.createTempFile(prefix, suffix, file);
+                File.createTempFile(prefix, suffix, dir);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
+    /**
+     * 创建文件夹
+     *
+     * @param dirPath
+     */
     public static void createDir(String dirPath) {
 
-        File file = new File(dirPath);
+        File dir = new File(dirPath);
 
-        if (file.exists()) {
+        if (dir.exists()) {
             return;
         }
 
-        file.mkdirs();
+        dir.mkdirs();
     }
 
+    /**
+     * 删除文件
+     *
+     * @param filePath
+     */
     public static void deleteFile(String filePath) {
 
         File file = new File(filePath);
@@ -289,15 +323,20 @@ public class FileHelper {
         }
     }
 
+    /**
+     * 删除文件夹
+     *
+     * @param dirPath
+     */
     public static void deleteDir(String dirPath) {
 
-        File file = new File(dirPath);
+        File dir = new File(dirPath);
 
-        if (!file.exists() || !file.isDirectory()) {
+        if (!dir.exists() || !dir.isDirectory()) {
             return;
         }
 
-        File[] files = file.listFiles();
+        File[] files = dir.listFiles();
         for (int i = 0; i < files.length; i++) {
 
             if (files[i].isFile()) {
@@ -307,22 +346,29 @@ public class FileHelper {
             }
         }
 
-        file.delete();
+        dir.delete();
     }
 
-    // TODO
+    /**
+     * 复制文件
+     *
+     * @param sourcePath
+     * @param targetPath
+     */
     public static void copyFile(String sourcePath, String targetPath) {
 
         try {
-
             File sourceFile = new File(sourcePath);
             File targetFile = new File(targetPath);
+
             if (!sourceFile.exists()) {
                 return;
             }
+
             if (!targetFile.exists()) {
-                // TODO
+                createFile(targetPath);
             }
+
             InputStream in = new FileInputStream(sourceFile);
             FileOutputStream out = new FileOutputStream(targetPath);
             byte[] bytesTemp = new byte[1024];
@@ -339,30 +385,36 @@ public class FileHelper {
         }
     }
 
-    // TODO
+    /**
+     * 复制文件夹
+     *
+     * @param sourcePath
+     * @param targetPath
+     */
     public static void copyDir(String sourcePath, String targetPath) {
 
         try {
-            File sourceFile = new File(sourcePath);
-            File targetFile = new File(targetPath);
+            File sourceDir = new File(sourcePath);
+            File targetDir = new File(targetPath);
 
-            if (!sourceFile.exists()) {
+            if (!sourceDir.exists()) {
                 return;
             }
 
-            if (!targetFile.exists()) {
-                // TODO
+            if (!targetDir.exists()) {
+
+                createDir(targetPath);
             }
 
-            String[] files = sourceFile.list();
+            String[] files = sourceDir.list();
             File fileTemp = null;
 
             for (int i = 0; i < files.length; i++) {
 
                 if (sourcePath.endsWith(File.separator)) {
-                    fileTemp = new File(sourceFile + files[i]);
+                    fileTemp = new File(sourcePath + files[i]);
                 } else {
-                    fileTemp = new File(sourceFile + File.separator + files[i]);
+                    fileTemp = new File(sourcePath + File.separator + files[i]);
                 }
 
                 if (fileTemp.isFile()) {
@@ -382,7 +434,7 @@ public class FileHelper {
                 }
 
                 if (fileTemp.isDirectory()) {
-                    copyDir(sourcePath + "/" + files[i], targetPath + "/" + files[i]);
+                    copyDir(sourcePath + File.separator + files[i], targetPath + File.separator + files[i]);
                 }
             }
 
@@ -394,11 +446,9 @@ public class FileHelper {
 
     public static void main(String[] args) {
 
-        String path = System.getProperty("user.dir") + "/pom.xml";
+        String path = System.getProperty("user.dir");
 
-        FileHelper.appendToFile(path, "Hello \n");
-        FileHelper.appendToFileByRandomAccess(path, "World \n");
-        FileHelper.readFileByLine(path);
-        FileHelper.copyDir(System.getProperty("user.dir"), "D:\\");
+        FileHelper.copyDir(path + "/src/test", "d:/test");
+        FileHelper.deleteDir("d:/test");
     }
 }
