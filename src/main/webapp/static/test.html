@@ -1,1 +1,31 @@
-hello world!
+<!DOCTYPE html>
+<html>
+<head>
+    <title>socket io</title>
+</head>
+<body>
+
+    <h2>socket io</h2>
+
+<script type="text/javascript" src="/static/scripts/socket.io.js"></script>
+<script type="text/javascript">
+
+    var socket = io('http://localhost:8889');
+
+    socket.on('connect', function () {
+
+        console.log('has connected to server');
+    });
+
+    socket.on('progress', function (data) {
+
+        console.log(data);
+    });
+
+    socket.on('disconnect', function () {
+
+        console.log('disconnected');
+    });
+</script>
+</body>
+</html>
