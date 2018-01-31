@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.yzone.dto.Register;
 import com.yzone.entity.User;
-import com.yzone.service.UserService;
+import com.yzone.service.IUserService;
 import com.yzone.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import com.yzone.dto.Result;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

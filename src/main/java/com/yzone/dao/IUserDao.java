@@ -1,10 +1,9 @@
 package com.yzone.dao;
 
 import com.yzone.entity.User;
-
 import java.util.List;
 
-public interface UserDao {
+public interface IUserDao {
 
     /**
      * 获取用户列表

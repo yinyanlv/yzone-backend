@@ -1,9 +1,9 @@
 package com.yzone.service.impl;
 
-import com.yzone.dao.UserDao;
+import com.yzone.dao.IUserDao;
 import com.yzone.dto.Result;
 import com.yzone.entity.User;
-import com.yzone.service.UserService;
+import com.yzone.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
-    private UserDao userDao;
+    private IUserDao userDao;
 
     @Override
     @Transactional
